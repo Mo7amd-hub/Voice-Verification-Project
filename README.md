@@ -1,51 +1,83 @@
-# Voice-Verification-Project
-Voice Verification using Deep Learning — Learn speaker embeddings and verify voices live.
+# Overview
 
-This project demonstrates a **Voice Verification System** using Deep Learning.  
-The model was trained on **Kaggle** and later tested live with real voice recordings to verify speaker identity.
+This project implements a voice verification system that can identify speakers by analyzing their voice characteristics. It uses a deep learning approach with a Siamese network architecture trained on triplet loss to create speaker embeddings that can differentiate between different speakers.
 
----
+**Key Features:**
+- Speaker identification from voice recordings
+- Live speaker recognition using microphone input
+- Uses MFCC for feature extraction
+- Siamese Network with Triplet Loss for high-quality embeddings
+- Fast and lightweight inference
 
-## 🎯 Objective
+## Project Structure
 
-- Extract unique **speaker embeddings** for each individual  
-- Verify whether two audio samples belong to the same speaker  
-- Evaluate the system in real-time using microphone input  
+```
+Voice-Verification-Project/
+├── Model/
+│   └── Voice_verification_model.h5       # Pre-trained Siamese model
+├── voices/                               # Speaker voice samples
+│   ├── aew/                             # Speaker 1 samples
+│   └── silence/                         # Silence/background samples
+├── notebook/
+│   └── voice-verification.ipynb         # Full training pipeline
+├── record.py                            # Script to record new voice samples
+├── live_test.py                         # Script for live speaker recognition
+└── README.md                            # This file
+```
 
----
+### 🛠 Tech Stack
 
-## 📚 Notebook Contents
+- Python
+- TensorFlow/Keras
+- librosa
+- numpy
+- sounddevice
+- scipy
 
-- Data exploration and preprocessing  
-- Audio feature extraction (e.g., Mel-Spectrograms)  
-- Model architecture (CNN / Siamese / Triplet network)  
-- Training and evaluation  
-- Metrics: ROC Curve, Equal Error Rate (EER), verification accuracy  
-- Live testing: record your own voice and compare with stored samples  
+### Setup
 
----
+1. Install dependencies:
+```bash
+pip install tensorflow keras librosa numpy sounddevice soundfile scipy scikit-learn tqdm torch torchaudio pandas
+```
 
-## 🧰 Tools & Libraries
+2. Clone the project and navigate to the directory.
 
-- **Python**  
-- **Librosa** for audio preprocessing  
-- **PyTorch** (or TensorFlow, depending on your code)  
-- **Matplotlib / Seaborn** for visualization  
-- **NumPy / Pandas**  
+## Usage
 
----
+Use `record.py` to record new voice samples from your microphone:
 
-## ⚡ How to Run
+```bash
+python record.py
+```
+This will record 10 audio clips of 3 seconds each for a speaker named "NewPerson" by default.
 
-1. Open the notebook on **Kaggle** (or run locally).  
-2. Execute the cells step by step.  
-3. For live testing: use the microphone recording cell to capture your voice.  
-4. Compare two audio samples → the system outputs a similarity score.  
+### Live Speaker Recognition
 
----
+Run `live_test.py` to start real-time speaker recognition:
 
-## 📊 Results
+```bash
+python live_test.py
+```
 
-- Trained model achieved promising verification accuracy.  
-- Successfully tested with **live voice recordings**.  
-- The system was able to distinguish between same-speaker and different-speaker audio samples effectively.  
+## 🧠 How It Works
+
+- Convert audio → MFCC features
+- Pass features into embedding model
+- Generate vector representation (embedding)
+- Compare embeddings using cosine similarity
+- Predict closest speaker
+
+## Future Enhancements
+
+- [ ] Add confidence threshold
+- [ ] speaker enrollment for new users
+- [ ] Multi-speaker detection
+- [ ] Optimize model for mobile/edge deployment
+- [ ] Implement voice liveness detection
+
+## Author
+Mohammed Mostafa
+
+## 📎 Notes
+For full training details and implementation, check the notebook inside the project.
