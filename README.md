@@ -81,3 +81,4 @@ Mohammed Mostafa
 
 ## 📎 Notes
 For full training details and implementation, check the notebook inside the project.
+You can also explore it on Kaggle: [(https://www.kaggle.com/code/mo7amed05/voice-verification-model)]
